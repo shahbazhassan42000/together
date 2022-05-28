@@ -1,1 +1,1 @@
-# together
+# Together Chat App
