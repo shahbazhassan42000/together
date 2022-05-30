@@ -4,7 +4,7 @@ import user from "./user";
 const { Router } = express;
 const api = Router();
 
-// book directory apis
+// user apis
 api.use("/user", user);
 
 export default api;

@@ -36,7 +36,7 @@ export default {
       }
       if (user) {
         console.log('user:', user);
-        return res.json({ user: user.toAuthJSON() });
+        return res.json(user.toAuthJSON() );
       } else {
         console.log('error:', info);
         return res.status(422).json(info);

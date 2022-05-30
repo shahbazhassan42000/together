@@ -1,11 +1,10 @@
 import express from 'express';
 import userController from '../controllers';
-import auth from '../middlewares/auth';
+import utils from '../utils';
 
 const { Router } = express;
 const { user } = userController;
-const { authorize } = auth;
-const { authenticate } = auth;
+const { auth } = utils;
 
 const api = Router();
 /**
@@ -40,7 +39,7 @@ api.post('/signin', user.signin);
  */
 
 // get all users
-api.get('/', user.all);
+api.get('/', auth.required, user.all);
 
 /**
  * @swagger
@@ -95,7 +94,7 @@ api.post('/signup', user.signup);
  *         description: ERROR!!! While getting user
  */
 // Get a single user against given name
-api.get('/:name', authenticate, user.one);
+api.get('/:name', user.one);
 
 /**
  * @swagger
@@ -128,7 +127,7 @@ api.get('/:name', authenticate, user.one);
  *           description: ERROR!!! While updating user
  */
 // update a single user against given name
-api.put('/:name', authenticate, user.update);
+api.put('/:name', user.update);
 
 /**
  * @swagger
@@ -154,6 +153,6 @@ api.put('/:name', authenticate, user.update);
  */
 
 // Delete a single user against given name
-api.delete('/:name', authenticate, user.delete);
+api.delete('/:name', user.delete);
 
 export default api;
