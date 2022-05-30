@@ -1,7 +1,6 @@
 import express from 'express';
 import userController from '../controllers';
 import auth from '../middlewares/auth';
-import Role from '../utils/role';
 
 const { Router } = express;
 const { user } = userController;
@@ -9,7 +8,20 @@ const { authorize } = auth;
 const { authenticate } = auth;
 
 const api = Router();
-
+/**
+ * @swagger
+ * /api/user:
+ *   post:
+ *     tags: ["Sign in"]
+ *     description: Sign in user and returns a JWT sign token
+ *     produces:
+ *      - application/json
+ *     responses:
+ *       200:
+ *         description: Returns a JWT sign token
+ *         schema:
+ *           $ref: '#/definitions/JWT_signed_body'
+ */
 api.post('/signin', user.signin);
 
 /**
@@ -28,7 +40,7 @@ api.post('/signin', user.signin);
  */
 
 // get all users
-api.get('/', authenticate, authorize(Role.Admin), user.all);
+api.get('/', user.all);
 
 /**
  * @swagger
@@ -56,7 +68,7 @@ api.get('/', authenticate, authorize(Role.Admin), user.all);
  *         description: ERROR!!! While creating user
  */
 // create user
-api.post('/signup', user.create);
+api.post('/signup', user.signup);
 
 /**
  * @swagger
