@@ -65,7 +65,8 @@ if (isProduction) {
       console.log(err);
     }
   );
-} else {
+}
+else {
   mongoose.connect('mongodb://localhost/together').then(
     () => {
       console.log('Database connected successfully');
@@ -87,13 +88,13 @@ if (isProduction) {
   });
 }
 
+// setting template renderer
+app.set('view engine','hbs')
 
 // api routes to /api
 app.use('/api', routes);
-
 // global error handler function
 app.use(errorHandler);
-
 app.server.listen(config.port);
 
 console.log(`Started on 'http://localhost:${app.server.address().port}'`);

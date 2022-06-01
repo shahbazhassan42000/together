@@ -39,7 +39,8 @@ api.post('/signin', user.signin);
  */
 
 // get all users
-api.get('/', auth.required, user.all);
+api.get('/all', auth.required,user.all);
+
 
 /**
  * @swagger
@@ -71,45 +72,45 @@ api.post('/signup', user.signup);
 
 /**
  * @swagger
- * /api/user/{name}:
+ * /api/user/{username}:
  *   get:
- *     tags: ["Get a user by name"]
- *     description: Retrieves a JSON object against given name
+ *     tags: ["Get a user by username"]
+ *     description: Retrieves a JSON object against given username
  *     produces:
  *         - application/json
  *     parameters:
- *         - name: name
+ *         - name: username
  *           in: path
- *           description: name of user to return
+ *           description: username of user to return
  *           required: true
  *           type: string
  *     responses:
  *       200:
- *         description: Returns a single user matched against given name
+ *         description: Returns a single user matched against given username
  *         schema:
  *           $ref: "#/definitions/User"
  *       404:
- *         description: user not found against given name
+ *         description: user not found against given username
  *       400:
  *         description: ERROR!!! While getting user
  */
-// Get a single user against given name
-api.get('/:name', user.one);
+// Get a single user against given username
+api.get('/',auth.required, user.one);
 
 /**
  * @swagger
- * /api/user/{name}:
+ * /api/user/{username}:
  *   put:
- *       tags: ["Update a user by name"]
+ *       tags: ["Update a user by username"]
  *       description: 'Update an existing user'
  *       consumes:
  *         - application/json
  *       produces:
  *         - application/json
  *       parameters:
- *         - name: name
+ *         - name: username
  *           in: path
- *           description: name of user to return
+ *           description: username of user to return
  *           required: true
  *           type: string
  *         - in: body
@@ -126,21 +127,21 @@ api.get('/:name', user.one);
  *         '400':
  *           description: ERROR!!! While updating user
  */
-// update a single user against given name
-api.put('/:name', user.update);
+// update a single user against given username
+api.put('/',auth.required, user.update);
 
 /**
  * @swagger
- * /api/user/{name}:
+ * /api/user/{username}:
  *   delete:
- *     tags: ["Delete a user by name"]
+ *     tags: ["Delete a user by username"]
  *     description: Deletes a user
  *     produces:
  *         - application/json
  *     parameters:
- *         - name: name
+ *         - name: username
  *           in: path
- *           description: name of user to delete
+ *           description: username of user to delete
  *           required: true
  *           type: string
  *     responses:
@@ -152,7 +153,7 @@ api.put('/:name', user.update);
  *           description: ERROR!!! While deleting user
  */
 
-// Delete a single user against given name
-api.delete('/:name', user.delete);
+// Delete a single user against given username
+api.delete('/',auth.required, user.delete);
 
 export default api;

@@ -1,6 +1,5 @@
 import config from '../config';
-
-const { expressjwt: jwt } = require('express-jwt');
+import jwt from 'express-jwt';
 
 function getTokenFromHeader(req) {
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token' ||

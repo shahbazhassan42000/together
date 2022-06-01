@@ -34,6 +34,7 @@ userSchema.methods.validatePassword = function(password) {
 
 userSchema.methods.toAuthJSON = function() {
   return {
+    id: this._id,
     username: this.username,
     token: this.generateJWT(),
     image: this.image,
@@ -45,6 +46,7 @@ userSchema.methods.generateJWT = function() {
   let expiryDate = new Date();
   expiryDate.setDate(expiryDate.getDate() + 60);
   return jwt.sign({
+      id: this._id,
       username: this.username,
       expiryDate: parseInt(expiryDate.getTime() / 1000)
     }
